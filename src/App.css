@@ -1,0 +1,18 @@
+.App {
+  text-align: center;
+}
+
+#logo{
+  animation: hue 3s ease-in-out infinite;
+  animation-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+}
+
+@keyframes hue{
+  from{
+    filter: hue-rotate(80deg);
+  }
+
+  to{
+    filter: hue-rotate(0deg);
+  }
+}
