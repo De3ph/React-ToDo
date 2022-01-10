@@ -11,6 +11,6 @@ Open file directory in command line and
 <br>
 <ol>
  <br>
- <li>yarn install</li>
- <li>yarn start</li>
+ <li>npm install</li>
+ <li>npm start</li>
  </ol>
