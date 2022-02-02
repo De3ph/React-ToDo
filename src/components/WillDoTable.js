@@ -1,7 +1,15 @@
 import { React } from "react";
+import { useRecoilValue , useSetRecoilState } from 'recoil'
+import { todosAtom, doneTodosAtom } from "../atoms";
 import '../../node_modules/bulma/css/bulma.css'
 
-const WillDoTable = ({todos , setTodo , handleDone}) => {
+const WillDoTable = ({handleDone}) => {
+
+    const todos = useRecoilValue(todosAtom);
+    const setTodo = useSetRecoilState(todosAtom);
+
+    const doneTodos = useRecoilValue(doneTodosAtom);
+    const setDoneTodos = useSetRecoilState(doneTodosAtom);
  
     return (
         <div className="WillDoTable column">
@@ -16,7 +24,7 @@ const WillDoTable = ({todos , setTodo , handleDone}) => {
                             return(
                                 <tr>
                                     <td style={{cursor: 'pointer'}}
-                                    onClick={()=>{handleDone(todo)}} key={index}>{todo}</td>
+                                    onClick={()=>{handleDone(todo , todos, setTodo, doneTodos, setDoneTodos)}} key={index}>{todo}</td>
                                 </tr>
                             )
                         })

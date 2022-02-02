@@ -1,4 +1,5 @@
 import React from 'react';
+import { RecoilRoot } from 'recoil'
 import './App.css';
 import ToDo from './components/ToDo';
 
@@ -6,7 +7,9 @@ import ToDo from './components/ToDo';
 function App() {
 
   return (
-    <ToDo></ToDo>
+    <RecoilRoot>
+      <ToDo></ToDo>
+    </RecoilRoot>
   );
 }
 

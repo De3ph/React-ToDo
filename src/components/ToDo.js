@@ -1,4 +1,8 @@
-import { React, useState } from "react";
+import { React } from "react";
+import { useRecoilState } from 'recoil';
+import { doneTodosAtom, todosAtom } from '../atoms';
+
+
 import ToDoInput from './ToDoInput';
 import ToDoTable from "./ToDoTable";
 import '../../node_modules/bulma/css/bulma.css';
@@ -6,34 +10,13 @@ import logo from '../images/logo192.png';
 
 export default function ToDo() {
 
+    // eslint-disable-next-line no-unused-vars
+    const [todos, setTodo] = useRecoilState(todosAtom);
+    // eslint-disable-next-line no-unused-vars
+    const [doneTodos, setDoneTodos] = useRecoilState(doneTodosAtom);
 
-    const [todos, setTodo] = useState([]);
-    const [doneTodos, setDoneTodos] = useState([]);
-
-    let createToDo = (newToDo , stateFunctionOfToDoText) => {
-        if (newToDo === '') {
-            return
-        }
-        else {
-            let added = todos.slice();
-            added.push(newToDo);
-            setTodo(added);
-            stateFunctionOfToDoText('');
-        }
-
-    }
-
-    let markAsDone = (doneTodo) => {
-        let newTodos = todos.filter((todo) => {
-            return todo !== doneTodo
-        });
-        setTodo(newTodos);
-        let newDoneTodos = doneTodos.slice();
-        newDoneTodos.push(doneTodo);
-        setDoneTodos(newDoneTodos);
-        console.log(doneTodos);
-    }
-
+    console.log(todos);
+    
     return (
         
         <div className="ToDo container has-background-danger-light py-6 is-desktop">
@@ -42,13 +25,11 @@ export default function ToDo() {
 
             <img id='logo' className='mx-auto' style={{display: 'block'}} src={logo} alt="React Logo" />
 
+
             <div 
             className="ToDo-row1 section is-small has-text-centered">
 
-                <ToDoInput 
-                className="column" 
-                handleTodo={createToDo}>
-                </ToDoInput>
+                <ToDoInput className="column"></ToDoInput>
 
             </div>
 
@@ -57,14 +38,7 @@ export default function ToDo() {
 
                 <p className="mb-4 is-size-6"> * Click on todo to mark as done</p>
 
-                <ToDoTable
-                    handleDone={markAsDone}
-                    todos={todos}
-                    setTodo={setTodo}
-                    doneTodos={doneTodos}
-                    setDoneTodos={setDoneTodos}
-
-                ></ToDoTable>
+                <ToDoTable></ToDoTable>
             </div>
 
         </div>

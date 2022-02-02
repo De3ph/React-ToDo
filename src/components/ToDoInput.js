@@ -1,10 +1,17 @@
 import React from "react";
 import { useState } from "react";
+
+import { useRecoilValue , useSetRecoilState} from 'recoil'
+import { todosAtom } from '../atoms';
+
+import { ToDoCreator } from '../logic/ToDoCreator'
 import '../../node_modules/bulma/css/bulma.css'
 
-const ToDoInput = ({handleTodo}) => {
+const ToDoInput = () => {
     
     const [text, setText] = useState('');
+    const todos = useRecoilValue(todosAtom);
+    const setTodos = useSetRecoilState(todosAtom);
 
     return (
 
@@ -13,7 +20,12 @@ const ToDoInput = ({handleTodo}) => {
 
             <button 
             className="ToDoInput-button button my-2 is-white"
-            onClick={()=>handleTodo(text ,setText)}
+            onClick={
+                async ()=>{
+                    await ToDoCreator(text, todos, setTodos);
+                    setText('');
+                }
+            }
             type='submit'>Add</button>
         </div>
 
